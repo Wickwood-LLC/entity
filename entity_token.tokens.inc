@@ -66,7 +66,7 @@ function _entity_token_map_to_token_type($property_info) {
 
   $type = isset($property_info['type']) ? $property_info['type'] : 'text';
   // Just use the type 'struct' for all structures.
-  if (!empty($property_info['property info'])) {
+  if ($type != 'list<struct>' && !empty($property_info['property info'])) {
     $type = 'struct';
   }
 
@@ -112,6 +112,10 @@ function entity_token_token_info_alter(&$info) {
         $info['tokens'][$token_type][$name]['description'] .= ' ' . t('The following properties may be appended to the token: @keys',
           array('@keys' => implode(', ', $help))
         );
+      }
+      // Save property info for struct-lists, so we can construct proper struct wrappers later.
+      if ($property_token_type == 'list<struct>' && !empty($property['property info'])) {
+        $info['tokens'][$token_type][$name]['property info'] = $property;
       }
     }
   }
@@ -201,6 +205,9 @@ function entity_token_tokens($type, $tokens, array $data = array(), array $optio
           $property_name = str_replace('-', '_', $name);
 
           try {
+            if (isset($token_info['property info'])) {
+              $options['property info'] = $token_info['property info'];
+            }
             // Pass on 'struct' properties wrapped, else un-wrap the data.
             $value = ($token_info['type'] == 'struct') ? $wrapper->$property_name : $wrapper->$property_name->value();
             $replacements += token_generate($token_info['type'], $chained_tokens, array($token_info['type'] => $value), $options);
@@ -236,7 +243,9 @@ function entity_token_tokens($type, $tokens, array $data = array(), array $optio
         if (is_numeric($delta) && $chained_tokens = token_find_with_prefix($tokens, $delta)) {
           $wrapper = !isset($wrapper) ? _entity_token_wrap_data($type, "list<$token_types[$item_token_type]>", $data[$type], $options) : $wrapper;
           try {
-            $replacements += token_generate($item_token_type, $chained_tokens, array($item_token_type => $wrapper->get($delta)->value()), $options);
+            // Pass on 'struct' properties wrapped, else un-wrap the data.
+            $value = ($item_token_type == 'struct') ? $wrapper->get($delta) : $wrapper->get($delta)->value();
+            $replacements += token_generate($item_token_type, $chained_tokens, array($item_token_type => $value), $options);
           }
           catch (EntityMetadataWrapperException $e) {
             // If tokens for not existing values are requested, just do nothing.
@@ -281,7 +290,8 @@ function _entity_token_wrap_data($token_type, $type, $data, $options) {
     $wrapper = $data;
   }
   else {
-    $wrapper = entity_metadata_wrapper($type, $data);
+    $info = isset($options['property info']) ? $options['property info'] : array();
+    $wrapper = entity_metadata_wrapper($type, $data, $info);
   }
   if (isset($options['language']) && $wrapper instanceof EntityStructureWrapper) {
     $wrapper->language($options['language']->language);
@@ -292,7 +302,7 @@ function _entity_token_wrap_data($token_type, $type, $data, $options) {
 /**
  * Gets the token replacement by correctly obeying the options.
  */
-function _entity_token_get_token($wrapper, $options) {
+function _entity_token_get_token(EntityMetadataWrapper $wrapper, $options) {
 
   if ($wrapper->value() === NULL) {
     // Do not provide a replacement if there is no value.
@@ -335,6 +345,15 @@ function _entity_token_get_token($wrapper, $options) {
     }
     return implode(', ', $output);
   }
+
+  // Care for outputing default structs values.
+  if ($wrapper instanceof EntityStructureWrapper) {
+    $info = $wrapper->info();
+    if (isset($info['default callback'])) {
+      return $info['default callback']($wrapper->value(), $options, $info);
+    }
+  }
+
   // Else we do not have a good string to output, e.g. for struct values. Just
   // output the string representation of the wrapper.
   return (string) $wrapper;
