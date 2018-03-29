@@ -1,6 +1,9 @@
 name = Entity tokens
-description = Provides token replacements for all properties that have no tokens and are known to the entity API.
+description = Provides token replacements for all properties that have no tokens and are known to the entity API. Applied patch from https://drupal.org/node/1621084#comment-6090246 to fix issue where Date fields that collect end dates do not produce tokens for the starting or ending date.
 core = 7.x
 files[] = entity_token.tokens.inc
 files[] = entity_token.module
 dependencies[] = entity
+
+version = "7.x-1.9"
+project = "entity"
