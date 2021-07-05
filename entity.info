@@ -1,15 +1,22 @@
 name = Entity API
 description = Enables modules to work with any entity type and to provide entities.
 core = 7.x
+test_dependencies[] = rules
+test_dependencies[] = i18n_string
+
 files[] = entity.features.inc
 files[] = entity.i18n.inc
 files[] = entity.info.inc
 files[] = entity.rules.inc
-files[] = entity.test
 files[] = includes/entity.inc
 files[] = includes/entity.controller.inc
 files[] = includes/entity.ui.inc
 files[] = includes/entity.wrapper.inc
+
+; Test cases
+files[] = entity.test
+
+; Views handlers
 files[] = views/entity.views.inc
 files[] = views/handlers/entity_views_field_handler_helper.inc
 files[] = views/handlers/entity_views_handler_area_entity.inc
