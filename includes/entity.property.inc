@@ -597,7 +597,7 @@ function entity_property_field_item_image_info() {
  * Do not make use of this function, instead use the new one.
  */
 function entity_metadata_verbatim_get($data, array $options, $name) {
-  return entity_property_verbatim_get($data, $options, $name);
+  return entity_property_verbatim_get($data, $options, $name, NULL, array());
 }
 
 /**
