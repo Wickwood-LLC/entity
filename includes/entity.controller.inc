@@ -574,7 +574,7 @@ class EntityAPIController extends DrupalDefaultEntityController implements Entit
    * Implements EntityAPIControllerInterface.
    *
    * @param $content
-   *   Optionally. Allows pre-populating the built content to ease overridding
+   *   Optionally. Allows pre-populating the built content to ease overriding
    *   this method.
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {

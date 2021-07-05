@@ -150,7 +150,7 @@ function entity_metadata_node_get_properties($node, array $options, $name, $enti
 }
 
 /**
- * Callback for determing access for node revision related properties.
+ * Callback for determining access for node revision related properties.
  */
 function entity_metadata_node_revision_access($op, $name, $entity = NULL, $account = NULL) {
   return $op == 'view' ? user_access('view revisions', $account) : user_access('administer nodes', $account);

@@ -102,7 +102,7 @@ function entity_get_all_property_info($entity_type = NULL) {
  * @param $value
  *   A single property value or an array of possible values to query for.
  * @param $limit
- *   Limit the numer of results. Defaults to 30.
+ *   Limit the number of results. Defaults to 30.
  *
  * @return
  *   An array of entity ids or NULL if there is no information how to query for

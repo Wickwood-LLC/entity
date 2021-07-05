@@ -142,7 +142,7 @@ function entity_entity_property_map_data_type($type) {
   while ($item_type = entity_property_list_extract_type($type)) {
     $type = $item_type;
   }
-  // Massage data type of entites to c
+  // Massage data type of entities to ctools type.
   if (entity_get_info($type)) {
     $type = "entity:$type";
   }

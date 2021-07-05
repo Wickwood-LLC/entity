@@ -410,7 +410,7 @@ class EntityAPITestCase extends EntityWebTestCase {
 
 
   /**
-   * Tests viewing entites.
+   * Tests viewing entities.
    */
   function testRendering() {
     module_enable(array('entity_feature'));
@@ -1054,7 +1054,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
    * Tests using entity_property_query().
    */
   function testEntityQuery() {
-    // Creat a test node.
+    // Create a test node.
     $title = '<b>Is it bold?<b>';
     $values[LANGUAGE_NONE][0] = array('value' => 'foo');
     $node = $this->drupalCreateNode(array($this->field_name => $values, 'title' => $title, 'uid' => $GLOBALS['user']->uid));
@@ -1069,7 +1069,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
     $this->assertEqual($results, array($node->nid), 'Queried nodes with a list of possible values.');
 
     $results = entity_property_query('node', 'author', $GLOBALS['user']);
-    $this->assertEqual($results, array($node->nid), 'Queried nodes with a given auhtor.');
+    $this->assertEqual($results, array($node->nid), 'Queried nodes with a given author.');
 
     // Create another test node and try querying for tags.
     $tag = entity_property_values_create_entity('taxonomy_term', array(

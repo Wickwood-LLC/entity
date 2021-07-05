@@ -329,7 +329,7 @@ function _entity_token_get_token($wrapper, $options) {
       return $wrapper->value($options);
   }
 
-  // Care for outputing list values.
+  // Care for outputting list values.
   if ($wrapper instanceof EntityListWrapper) {
     $output = array();
     foreach ($wrapper as $item) {

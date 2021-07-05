@@ -239,7 +239,7 @@ class EntityFieldHandlerHelper {
    *   An array with numeric indices, containing the type of the extracted
    *   wrappers in the first element. The second element of the array contains
    *   the extracted property value(s) for each wrapper, keyed to the same key
-   *   that was used for the respecive wrapper in $wrappers. All extracted
+   *   that was used for the respective wrapper in $wrappers. All extracted
    *   properties are returned as metadata wrappers.
    */
   public static function extract_property_multiple(array $wrappers, $selector) {
