@@ -76,8 +76,8 @@ function entity_metadata_field_default_property_callback(&$info, $entity_type, $
 /**
  * Additional callback to adapt the property info for text fields. If a text
  * field is processed we make use of a separate data structure so that format
- * filters are available too. For the text value the sanitized, thus processed
- * value is returned by default.
+ * filters are available too. For the text value that is sanitized, this
+ * processed value is returned by default.
  *
  * @see entity_metadata_field_entity_property_info()
  * @see entity_field_info_alter()
