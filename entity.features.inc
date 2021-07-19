@@ -168,7 +168,7 @@ function entity_features_export_options($a1, $a2 = NULL) {
  *
  * Features component callback.
  */
-function entity_features_export($data, &$export, $module_name = '', $entity_type) {
+function entity_features_export($data, &$export, $module_name, $entity_type) {
   return entity_features_get_controller($entity_type)->export($data, $export, $module_name);
 }
 
@@ -177,7 +177,7 @@ function entity_features_export($data, &$export, $module_name = '', $entity_type
  *
  * Features component callback.
  */
-function entity_features_export_render($module, $data, $export = NULL, $entity_type) {
+function entity_features_export_render($module, $data, $export, $entity_type) {
   return entity_features_get_controller($entity_type)->export_render($module, $data, $export);
 }
 
@@ -186,7 +186,7 @@ function entity_features_export_render($module, $data, $export = NULL, $entity_t
  *
  * Features component callback.
  */
-function entity_features_revert($module = NULL, $entity_type) {
+function entity_features_revert($module, $entity_type) {
   return entity_features_get_controller($entity_type)->revert($module);
 }
 
