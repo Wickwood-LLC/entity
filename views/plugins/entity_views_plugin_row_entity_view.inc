@@ -95,4 +95,5 @@ class entity_views_plugin_row_entity_view extends views_plugin_row {
       return drupal_render($render);
     }
   }
+
 }

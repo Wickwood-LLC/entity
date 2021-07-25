@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @file
  * Renders a full entity in a views area.
  */
 
 class entity_views_handler_area_entity extends views_handler_area {
+
   public function option_definition() {
     $options = parent::option_definition();
     $options['entity_type'] = array('default' => 'node');
@@ -147,4 +149,5 @@ class entity_views_handler_area_entity extends views_handler_area {
 
     return $tokens;
   }
+
 }

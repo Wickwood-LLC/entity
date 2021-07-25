@@ -68,15 +68,15 @@ abstract class EntityMetadataWrapper {
    *   - decode: If set to TRUE and some textual data is already sanitized, it
    *     strips HTML tags and decodes HTML entities. Defaults to FALSE.
    *
-   *  @return
-   *    The value of the wrapped data. If the data property is not set, NULL
-   *    is returned.
+   * @return
+   *   The value of the wrapped data. If the data property is not set, NULL
+   *   is returned.
    *
-   *  @throws EntityMetadataWrapperException
-   *    In case there are no data values available to the wrapper, an exception
-   *    is thrown. E.g. if the value for an entity property is to be retrieved
-   *    and there is no entity available, the exception is thrown. However, if
-   *    an entity is available but the property is not set, NULL is returned.
+   * @throws EntityMetadataWrapperException
+   *   In case there are no data values available to the wrapper, an exception
+   *   is thrown. E.g. if the value for an entity property is to be retrieved
+   *   and there is no entity available, the exception is thrown. However, if
+   *   an entity is available but the property is not set, NULL is returned.
    */
   public function value(array $options = array()) {
     if (!$this->dataAvailable() && isset($this->info['parent'])) {
@@ -225,6 +225,7 @@ abstract class EntityMetadataWrapper {
    *   The operation being performed. One of 'view' or 'edit.
    * @param $account
    *   The user to check for. Leave it to NULL to check for the global user.
+   *
    * @return boolean
    *   Whether access to entity property is allowed for the given operation.
    *   However if we wrap no data, it returns whether access is allowed to the
@@ -239,8 +240,8 @@ abstract class EntityMetadataWrapper {
    * Returns a string to use to identify this wrapper in error messages.
    *
    * @return
-   *  A string that identifies this wrapper and its chain of ancestors, of the
-   *  form 'grandparentidentifier->parentidentifier->identifier'.
+   *   A string that identifies this wrapper and its chain of ancestors, of the
+   *   form 'grandparentidentifier->parentidentifier->identifier'.
    */
   public function debugIdentifierLocation() {
     $debug = $this->info['name'];
@@ -258,6 +259,7 @@ abstract class EntityMetadataWrapper {
     unset($vars['cache']);
     return drupal_map_assoc(array_keys($vars));
   }
+
 }
 
 /**
@@ -283,6 +285,7 @@ class EntityValueWrapper extends EntityMetadataWrapper {
     }
     return $data;
   }
+
 }
 
 /**
@@ -340,10 +343,12 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
    * @param $name
    *   The name of the property. If not given, info about all properties will
    *   be returned.
-   * @throws EntityMetadataWrapperException
-   *   If there is no such property.
+   *
    * @return
    *   An array of info about the property.
+   *
+   * @throws EntityMetadataWrapperException
+   *   If there is no such property.
    */
   public function getPropertyInfo($name = NULL) {
     $this->spotInfo();
@@ -572,6 +577,7 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
     $this->propertyInfoAltered = FALSE;
     parent::clear();
   }
+
 }
 
 /**
@@ -979,6 +985,7 @@ class EntityDrupalWrapper extends EntityStructureWrapper {
       $this->data = FALSE;
     }
   }
+
 }
 
 /**
@@ -1000,7 +1007,6 @@ class EntityListWrapper extends EntityMetadataWrapper implements IteratorAggrega
    * generic list of entities (list<entity>) this is FALSE.
    */
   protected $isEntityList;
-
 
   public function __construct($type, $data = NULL, $info = array()) {
     parent::__construct($type, NULL, $info);
@@ -1178,13 +1184,14 @@ class EntityListWrapper extends EntityMetadataWrapper implements IteratorAggrega
     }
     return isset($labels) ? implode(', ', $labels) : NULL;
   }
+
 }
 
 /**
  * Provide a separate Exception so it can be caught separately.
  */
-class EntityMetadataWrapperException extends Exception { }
-
+class EntityMetadataWrapperException extends Exception {
+}
 
 /**
  * Allows to easily iterate over existing child wrappers.
@@ -1226,6 +1233,7 @@ class EntityMetadataWrapperIterator implements RecursiveIterator {
   public function getChildren() {
     return $this->current()->getIterator();
   }
+
 }
 
 /**
@@ -1270,4 +1278,5 @@ class EntityMetadataArrayObject implements ArrayAccess, Countable, IteratorAggre
   public function getIterator() {
     return new ArrayIterator($this->data);
   }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains the entity_views_handler_relationship_by_bundle class.
@@ -17,6 +18,7 @@
  * @ingroup views_field_handlers
  */
 class entity_views_handler_relationship_by_bundle extends views_handler_relationship {
+
   function option_definition() {
     $options = parent::option_definition();
     $options['bundle_types'] = array('default' => array());
@@ -114,4 +116,5 @@ class entity_views_handler_relationship_by_bundle extends views_handler_relation
     $alias = $def['table'] . '_' . $this->table;
     $this->alias = $this->query->add_relationship($alias, $join, $this->definition['base'], $this->relationship);
   }
+
 }

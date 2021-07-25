@@ -178,7 +178,8 @@ class EntityDefaultUIController {
    * @param $form_state
    *   The overview form state which will be used for validating.
    */
-  public function overviewFormValidate($form, &$form_state) {}
+  public function overviewFormValidate($form, &$form_state) {
+  }
 
   /**
    * Overview form submit callback.
@@ -188,8 +189,8 @@ class EntityDefaultUIController {
    * @param $form_state
    *   The overview form state which will be used for submitting.
    */
-  public function overviewFormSubmit($form, &$form_state) {}
-
+  public function overviewFormSubmit($form, &$form_state) {
+  }
 
   /**
    * Generates the render array for a overview table for arbitrary entities
@@ -330,7 +331,6 @@ class EntityDefaultUIController {
     }
     return $row;
   }
-
 
   /**
    * Builds the operation form.
@@ -495,6 +495,7 @@ class EntityDefaultUIController {
     entity_form_submit_build_entity($this->entityType, $form_state[$this->entityType], $form, $form_state);
     return $form_state[$this->entityType];
   }
+
 }
 
 /**
@@ -519,7 +520,7 @@ class EntityContentUIController extends EntityDefaultUIController {
 
     $defaults = array(
       'file' => $this->entityInfo['admin ui']['file'],
-      'file path' =>  isset($this->entityInfo['admin ui']['file path']) ? $this->entityInfo['admin ui']['file path'] : drupal_get_path('module', $this->entityInfo['module']),
+      'file path' => isset($this->entityInfo['admin ui']['file path']) ? $this->entityInfo['admin ui']['file path'] : drupal_get_path('module', $this->entityInfo['module']),
     );
 
     // Add view, edit and delete menu items for content entities.
@@ -572,6 +573,7 @@ class EntityContentUIController extends EntityDefaultUIController {
     // The manage entity path is unset for the content entity UI.
     $form_state['redirect'] = '<front>';
   }
+
 }
 
 /**
@@ -617,6 +619,7 @@ class EntityBundleableUIController extends EntityContentUIController {
 
     return $items;
   }
+
 }
 
 /**
@@ -764,4 +767,3 @@ function theme_entity_ui_overview_item($variables) {
   }
   return $output;
 }
-

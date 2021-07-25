@@ -106,6 +106,7 @@ function entity_property_default_render_value_by_type(EntityMetadataWrapper $pro
   switch ($property->type()) {
     case 'boolean':
       return $property->value() ? t('yes') : t('no');
+
     default:
       return check_plain($property->value());
   }

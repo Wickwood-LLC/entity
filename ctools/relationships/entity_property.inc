@@ -19,7 +19,7 @@ $plugin = array(
   'defaults' => array(
     'selector' => '',
     'target_context' => 'entity',
-    'concatenator' => ','
+    'concatenator' => ',',
   ),
 );
 
@@ -90,7 +90,7 @@ function entity_entity_property_edit_form($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Data selector'),
     '#description' => t('Any valid data selector, e.g. "title" to select a node\'s title, or "field_tags:1" to select the second tag.'),
-    '#default_value' =>  $conf['selector'],
+    '#default_value' => $conf['selector'],
     '#required' => TRUE,
   );
   $form['concatenator'] = array(

@@ -44,7 +44,8 @@ function entity_metadata_field_entity_property_info() {
 
 /**
  * Callback to add in property info defaults per field instance.
- * @see entity_metadata_field_entity_property_info().
+ *
+ * @see entity_metadata_field_entity_property_info()
  */
 function entity_metadata_field_default_property_callback(&$info, $entity_type, $field, $instance, $field_type) {
   if (!empty($field_type['property_type'])) {
@@ -99,7 +100,7 @@ function entity_metadata_field_text_property_callback(&$info, $entity_type, $fie
     unset($property['query callback']);
 
     if (empty($instance['settings']['text_processing'])) {
-      $property['property info'] =  entity_property_field_item_textsummary_info();
+      $property['property info'] = entity_property_field_item_textsummary_info();
     }
     else {
       // For formatted text we use the type name 'text_formatted'.
@@ -118,7 +119,8 @@ function entity_metadata_field_text_property_callback(&$info, $entity_type, $fie
 
 /**
  * Additional callback to adapt the property info for term reference fields.
- * @see entity_metadata_field_entity_property_info().
+ *
+ * @see entity_metadata_field_entity_property_info()
  */
 function entity_metadata_field_term_reference_callback(&$info, $entity_type, $field, $instance, $field_type) {
   $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
@@ -135,7 +137,8 @@ function entity_metadata_field_term_reference_callback(&$info, $entity_type, $fi
 
 /**
  * Additional callback to adapt the property info for file fields.
- * @see entity_metadata_field_entity_property_info().
+ *
+ * @see entity_metadata_field_entity_property_info()
  */
 function entity_metadata_field_file_callback(&$info, $entity_type, $field, $instance, $field_type) {
   $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
@@ -162,7 +165,8 @@ function entity_metadata_field_file_callback(&$info, $entity_type, $field, $inst
 /**
  * Additional callback to adapt the property info for image fields.
  * This callback gets invoked after entity_metadata_field_file_callback().
- * @see entity_metadata_field_entity_property_info().
+ *
+ * @see entity_metadata_field_entity_property_info()
  */
 function entity_metadata_field_image_callback(&$info, $entity_type, $field, $instance, $field_type) {
   $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];

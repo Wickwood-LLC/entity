@@ -316,14 +316,19 @@ function _entity_token_get_token($wrapper, $options) {
   switch ($wrapper->type()) {
     case 'integer':
       return $wrapper->value();
+
     case 'decimal':
       return number_format($wrapper->value(), 2);
+
     case 'date':
       return format_date($wrapper->value(), 'medium', '', NULL, $langcode);
+
     case 'duration':
       return format_interval($wrapper->value(), 2, $langcode);
+
     case 'boolean':
       return $wrapper->value() ? t('true') : t('false');
+
     case 'uri':
     case 'text':
       return $wrapper->value($options);

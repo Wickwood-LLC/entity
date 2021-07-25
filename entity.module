@@ -46,8 +46,6 @@ define('ENTITY_OVERRIDDEN', 0x03);
  */
 define('ENTITY_FIXED', 0x04 | 0x02);
 
-
-
 /**
  * Determines whether for the given entity type a given operation is available.
  *
@@ -69,7 +67,7 @@ function entity_type_supports($entity_type, $op) {
     'revision delete' => 'revision deletion callback',
     'save' => 'save callback',
     'access' => 'access callback',
-    'form' => 'form callback'
+    'form' => 'form callback',
   );
   if (isset($info[$keys[$op]])) {
     return TRUE;
@@ -105,6 +103,7 @@ function entity_type_supports($entity_type, $op) {
  *   The ID of the entity to load, passed by the menu URL.
  * @param $entity_type
  *   The type of the entity to load.
+ *
  * @return
  *   A fully loaded entity object, or FALSE in case of error.
  */
@@ -198,14 +197,19 @@ function entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
   switch ($op) {
     case 'view':
       return $label;
+
     case 'edit':
       return t('Edit @label', array('@label' => $label));
+
     case 'clone':
       return t('Clone @label', array('@label' => $label));
+
     case 'revert':
       return t('Revert @label', array('@label' => $label));
+
     case 'delete':
       return t('Delete @label', array('@label' => $label));
+
     case 'export':
       return t('Export @label', array('@label' => $label));
   }
@@ -216,7 +220,7 @@ function entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
 /**
  * A wrapper around entity_load() to load a single entity by name or numeric id.
  *
- * @todo: Re-name entity_load() to entity_load_multiple() in d8 core and this
+ * @todo Re-name entity_load() to entity_load_multiple() in d8 core and this
  * to entity_load().
  *
  * @param $entity_type
@@ -324,6 +328,7 @@ function entity_delete($entity_type, $id) {
  * @param $ids
  *   An array of entity ids of the entities to delete. In case the entity makes
  *   use of a name key, both the names or numeric ids may be passed.
+ *
  * @return
  *   FALSE if the given entity type isn't compatible to the CRUD API.
  */
@@ -453,6 +458,7 @@ function entity_revision_set_default($entity_type, $entity) {
  * @param $values
  *   An array of values to set, keyed by property name. If the entity type has
  *   bundles the bundle key has to be specified.
+ *
  * @return
  *   A new instance of the entity type or FALSE if there is no information for
  *   the given entity type.
@@ -482,6 +488,7 @@ function entity_create($entity_type, array $values) {
  *   The entity to export.
  * @param $prefix
  *   An optional prefix for each line.
+ *
  * @return
  *   The exported entity as serialized string. The format is determined by the
  *   respective entity controller, e.g. it is JSON for the EntityAPIController.
@@ -508,6 +515,7 @@ function entity_export($entity_type, $entity, $prefix = '') {
  * @param string $export
  *   The string containing the serialized entity as produced by
  *   entity_export().
+ *
  * @return
  *   The imported entity object not yet saved.
  */
@@ -550,6 +558,7 @@ function entity_type_is_fieldable($entity_type) {
  * @param $langcode
  *   (optional) A language code to use for rendering. Defaults to the global
  *   content language of the current request.
+ *
  * @return
  *   The renderable array.
  */
@@ -611,6 +620,7 @@ function entity_id($entity_type, $entity) {
  *   of the entity, as returned by entity_uri().
  *   This parameter is only supported for entities which controller is a
  *   EntityAPIControllerInterface.
+ *
  * @return
  *   The renderable array, keyed by the entity type and by entity identifiers,
  *   for which the entity name is used if existing - see entity_id(). If there
@@ -719,8 +729,8 @@ function entity_key_array_by_property(array $entities, $property) {
  * Get the entity info for the entity types provided via the entity CRUD API.
  *
  * @return
- *  An array in the same format as entity_get_info(), containing the entities
- *  whose controller class implements the EntityAPIControllerInterface.
+ *   An array in the same format as entity_get_info(), containing the entities
+ *   whose controller class implements the EntityAPIControllerInterface.
  */
 function entity_crud_get_info() {
   $types = array();
@@ -1128,7 +1138,7 @@ function entity_theme() {
     ),
     'entity_ui_overview_item' => array(
       'variables' => array('label' => NULL, 'entity_type' => NULL, 'url' => FALSE, 'name' => FALSE),
-      'file' => 'includes/entity.ui.inc'
+      'file' => 'includes/entity.ui.inc',
     ),
   );
 }
@@ -1283,18 +1293,17 @@ function entity_ui_get_form($entity_type, $entity, $op = 'edit', $form_state = a
   return drupal_build_form($form_id, $form_state);
 }
 
-
 /**
  * Gets the page/menu title for local action operations.
  *
  * @param $op
- *  The current operation. One of 'add' or 'import'.
+ *   The current operation. One of 'add' or 'import'.
  * @param $entity_type
- *  The entity type.
+ *   The entity type.
  * @param $bundle_name
- *  (Optional) The name of the bundle. May be NULL if the bundle name is not
- *  relevant to the current page. If the entity type has only one bundle, or no
- *  bundles, this will be the same as the entity type.
+ *   (Optional) The name of the bundle. May be NULL if the bundle name is not
+ *   relevant to the current page. If the entity type has only one bundle, or no
+ *   bundles, this will be the same as the entity type.
  */
 function entity_ui_get_action_title($op, $entity_type, $bundle_name = NULL) {
   $info = entity_get_info($entity_type);
@@ -1403,6 +1412,7 @@ function entity_get_extra_fields_controller($type = NULL) {
  *      info before it is utilized by the wrapper.
  *    - property defaults: (optional) An array of defaults for the info of
  *      each property of the wrapped data item.
+ *
  * @return EntityMetadataWrapper
  *   Dependent on the passed data the right wrapper is returned.
  */

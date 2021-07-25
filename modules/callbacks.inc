@@ -17,6 +17,7 @@ function entity_metadata_entity_get_properties($entity, array $options, $name, $
 
 /**
  * Callback for getting book node properties.
+ *
  * @see entity_metadata_book_entity_info_alter()
  */
 function entity_metadata_book_get_properties($node, array $options, $name, $entity_type) {
@@ -40,6 +41,7 @@ function entity_metadata_book_get_properties($node, array $options, $name, $enti
 
 /**
  * Callback for getting comment properties.
+ *
  * @see entity_metadata_comment_entity_info_alter()
  */
 function entity_metadata_comment_get_properties($comment, array $options, $name) {
@@ -68,6 +70,7 @@ function entity_metadata_comment_get_properties($comment, array $options, $name)
 
 /**
  * Callback for setting comment properties.
+ *
  * @see entity_metadata_comment_entity_info_alter()
  */
 function entity_metadata_comment_setter($comment, $name, $value) {
@@ -83,6 +86,7 @@ function entity_metadata_comment_setter($comment, $name, $value) {
 
 /**
  * Callback for getting comment related node properties.
+ *
  * @see entity_metadata_comment_entity_info_alter()
  */
 function entity_metadata_comment_get_node_properties($node, array $options, $name, $entity_type) {
@@ -158,6 +162,7 @@ function entity_metadata_node_revision_access($op, $name, $entity = NULL, $accou
 
 /**
  * Callback for getting poll properties.
+ *
  * @see entity_metadata_poll_entity_info_alter()
  */
 function entity_metadata_poll_node_get_properties($node, array $options, $name) {
@@ -182,18 +187,19 @@ function entity_metadata_poll_node_get_properties($node, array $options, $name) 
   }
   switch ($name) {
     case 'poll_winner_votes':
-        return $winner['chvotes'];
+      return $winner['chvotes'];
 
     case 'poll_winner':
-        return $winner['chtext'];
+      return $winner['chtext'];
 
     case 'poll_winner_percent':
-        return ($winner['chvotes'] / $total_votes) * 100;
+      return ($winner['chvotes'] / $total_votes) * 100;
   }
 }
 
 /**
  * Callback for getting statistics properties.
+ *
  * @see entity_metadata_statistics_entity_info_alter()
  */
 function entity_metadata_statistics_node_get_properties($node, array $options, $name) {
@@ -224,6 +230,7 @@ function entity_metadata_statistics_properties_access($op, $property, $entity = 
 
 /**
  * Callback for getting site-wide properties.
+ *
  * @see entity_metadata_system_entity_info_alter()
  */
 function entity_metadata_system_get_properties($data, array $options, $name) {
@@ -254,6 +261,7 @@ function entity_metadata_system_get_properties($data, array $options, $name) {
 
 /**
  * Callback for getting properties for the current page request.
+ *
  * @see entity_metadata_system_entity_info_alter()
  */
 function entity_metadata_system_get_page_properties($data, array $options, $name) {
@@ -265,6 +273,7 @@ function entity_metadata_system_get_page_properties($data, array $options, $name
 
 /**
  * Callback for getting file properties.
+ *
  * @see entity_metadata_system_entity_info_alter()
  */
 function entity_metadata_system_get_file_properties($file, array $options, $name) {
@@ -328,6 +337,7 @@ function entity_metadata_taxonomy_term_setter($term, $name, $value) {
       $vocabulary = is_numeric($value) ? taxonomy_vocabulary_load($value) : taxonomy_vocabulary_machine_name_load($value);
       $term->vocabulary_machine_name = $vocabulary->machine_name;
       return $term->vid = $vocabulary->vid;
+
     case 'parent':
       return $term->parent = $value;
   }
@@ -335,6 +345,7 @@ function entity_metadata_taxonomy_term_setter($term, $name, $value) {
 
 /**
  * Callback for getting vocabulary properties.
+ *
  * @see entity_metadata_taxonomy_entity_info_alter()
  */
 function entity_metadata_taxonomy_vocabulary_get_properties($vocabulary, array $options, $name) {
@@ -347,6 +358,7 @@ function entity_metadata_taxonomy_vocabulary_get_properties($vocabulary, array $
 
 /**
  * Callback for getting user properties.
+ *
  * @see entity_metadata_user_entity_info_alter()
  */
 function entity_metadata_user_get_properties($account, array $options, $name, $entity_type) {
@@ -381,6 +393,7 @@ function entity_metadata_user_get_properties($account, array $options, $name, $e
 
 /**
  * Callback for setting user properties.
+ *
  * @see entity_metadata_user_entity_info_alter()
  */
 function entity_metadata_user_set_properties($account, $name, $value) {
@@ -736,9 +749,11 @@ function entity_metadata_user_properties_access($op, $property, $entity = NULL, 
       }
       // Allow edit access for own user name if the permission is satisfied.
       return $is_own_account && user_access('change own username', $account);
+
     case 'mail':
       // Allow access to own mail address.
       return $is_own_account;
+
     case 'roles':
       // Allow view access for own roles.
       return ($op == 'view' && $is_own_account);
@@ -808,11 +823,13 @@ function entity_metadata_taxonomy_access($op, $entity = NULL, $account = NULL, $
         return TRUE;
       }
       break;
+
     case "update":
       if ($entity_type == 'taxonomy_term') {
         return user_access("edit terms in $entity->vid", $account);
       }
       break;
+
     case "create":
       if ($entity_type == 'taxonomy_term') {
         // Check for taxonomy_access_fix contrib module which adds additional
@@ -822,12 +839,14 @@ function entity_metadata_taxonomy_access($op, $entity = NULL, $account = NULL, $
         }
       }
       break;
+
     case "delete":
       if ($entity_type == 'taxonomy_term') {
         return user_access("delete terms in $entity->vid", $account);
       }
       break;
   }
+
   return FALSE;
 }
 
@@ -849,7 +868,6 @@ function entity_metadata_file_access($op, $file, $account, $entity_type) {
   }
   return FALSE;
 }
-
 
 /**
  * Callback to determine access for properties which are fields.

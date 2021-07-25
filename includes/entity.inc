@@ -412,6 +412,7 @@ class Entity implements EntityInterface {
   public function __wakeup() {
     $this->setUp();
   }
+
 }
 
 /**

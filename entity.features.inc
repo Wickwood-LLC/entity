@@ -86,7 +86,7 @@ class EntityDefaultFeaturesController {
       else {
         $export['features'][$this->type][$name] = $name;
 
-        // If this is a bundle of a fieldable entity, add its fields to the pipe.
+        // If this is a bundle of a fieldable entity add its fields to the pipe.
         if (!empty($this->info['bundle of'])) {
           $fields = field_info_instances($this->info['bundle of'], $entity->{$this->bundleKey});
           foreach ($fields as $name => $field) {
@@ -114,7 +114,7 @@ class EntityDefaultFeaturesController {
     $output = array();
     $output[] = '  $items = array();';
     foreach (entity_load_multiple_by_name($this->type, $data) as $name => $entity) {
-      $export  = "  \$items['$name'] = entity_import('{$this->type}', '";
+      $export = "  \$items['$name'] = entity_import('{$this->type}', '";
       // Make sure to escape the characters \ and '.
       $export .= addcslashes(entity_export($this->type, $entity, '  '), '\\\'');
       $export .= "');";
@@ -135,6 +135,7 @@ class EntityDefaultFeaturesController {
       entity_delete_multiple($this->type, array_keys($defaults));
     }
   }
+
 }
 
 /**
