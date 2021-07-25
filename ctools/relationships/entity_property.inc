@@ -116,7 +116,7 @@ function entity_entity_property_edit_form_validate($form, &$form_state) {
     $parts = explode(':', $form_state['values']['selector']);
     foreach ($parts as $part) {
       if (!($wrapper instanceof EntityStructureWrapper || $wrapper instanceof EntityListWrapper)) {
-        form_set_error('selector', t('Unable to apply the data selector part %key.'. array('%key' => $part)));
+        form_set_error('selector', t('Unable to apply the data selector part %key.', array('%key' => $part)));
         continue;
       }
       $wrapper = $wrapper->get($part);
