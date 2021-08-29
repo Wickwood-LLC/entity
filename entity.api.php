@@ -463,5 +463,23 @@ function hook_entity_views_field_handlers_alter(array &$field_handlers) {
 }
 
 /**
+ * Act after default entities have been rebuilt.
+ *
+ * This hook is invoked after default entities have been fully saved to the
+ * database, but with the lock still active.
+ *
+ * @param array $entities
+ *   An array of the entities that have been saved, keyed by name.
+ * @param array $originals
+ *   An array of the original copies of the entities that have been saved,
+ *   keyed by name.
+ *
+ * @see _entity_defaults_rebuild()
+ */
+function hook_ENTITY_TYPE_defaults_rebuild($entities, $originals) {
+
+}
+
+/**
  * @} End of "addtogroup hooks".
  */
