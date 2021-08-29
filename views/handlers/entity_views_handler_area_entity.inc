@@ -16,7 +16,7 @@ class entity_views_handler_area_entity extends views_handler_area {
     return $options;
   }
 
-  function options_form(&$form, &$form_state) {
+  public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
     $entity_type_options = array();
@@ -130,7 +130,7 @@ class entity_views_handler_area_entity extends views_handler_area {
    * are available and gets their values. This will then be
    * used in one giant str_replace().
    */
-  function get_render_tokens() {
+  public function get_render_tokens() {
     $tokens = array();
     if (!empty($this->view->build_info['substitutions'])) {
       $tokens = $this->view->build_info['substitutions'];

@@ -695,7 +695,7 @@ class EntityDefaultViewsController {
    * @param $left_type
    *   The data type from which to join.
    */
-  function getRelationshipHandlerClass($entity_type, $left_type) {
+  public function getRelationshipHandlerClass($entity_type, $left_type) {
     // Look for an entity type which is used as bundle for the given entity
     // type. If there is one, allow filtering the relation by bundle by using
     // our own handler.

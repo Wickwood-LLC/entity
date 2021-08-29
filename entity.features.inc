@@ -110,7 +110,7 @@ class EntityDefaultFeaturesController {
   /**
    * Generates the result for hook_features_export_render().
    */
-  function export_render($module, $data, $export = NULL) {
+  public function export_render($module, $data, $export = NULL) {
     $output = array();
     $output[] = '  $items = array();';
     foreach (entity_load_multiple_by_name($this->type, $data) as $name => $entity) {
@@ -130,7 +130,7 @@ class EntityDefaultFeaturesController {
   /**
    * Generates the result for hook_features_revert().
    */
-  function revert($module = NULL) {
+  public function revert($module = NULL) {
     if ($defaults = features_get_default($this->type, $module)) {
       entity_delete_multiple($this->type, array_keys($defaults));
     }

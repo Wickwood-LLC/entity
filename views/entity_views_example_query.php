@@ -33,7 +33,7 @@ abstract class entity_views_example_query extends views_plugin_query {
    * @param $order
    *   The order to sort items in - either 'ASC' or 'DESC'. Defaults to 'ASC'.
    */
-  public abstract function add_selector_orderby($selector, $order = 'ASC');
+  abstract public function add_selector_orderby($selector, $order = 'ASC');
 
   /**
    * Returns the according entity objects for the given query results.
@@ -63,7 +63,7 @@ abstract class entity_views_example_query extends views_plugin_query {
    *
    * @see EntityFieldHandlerHelper::extract_property_multiple()
    */
-  public abstract function get_result_entities($results, $relationship = NULL, $field = NULL);
+  abstract public function get_result_entities($results, $relationship = NULL, $field = NULL);
 
   /**
    * Returns the according metadata wrappers for the given query results.
@@ -83,6 +83,6 @@ abstract class entity_views_example_query extends views_plugin_query {
    *   the wrappers returned by this method; and the array of retrieved
    *   EntityMetadataWrapper objects, keyed by the same indexes as the results.
    */
-  public abstract function get_result_wrappers($results, $relationship = NULL, $field = NULL);
+  abstract public function get_result_wrappers($results, $relationship = NULL, $field = NULL);
 
 }

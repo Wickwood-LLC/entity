@@ -55,14 +55,14 @@ class EntityAPITestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'entity_test');
   }
 
   /**
    * Tests CRUD.
    */
-  function testCRUD() {
+  public function testCRUD() {
     module_enable(array('entity_feature'));
 
     $user1 = $this->drupalCreateUser();
@@ -99,7 +99,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Tests CRUD for entities supporting revisions.
    */
-  function testCRUDRevisisions() {
+  public function testCRUDRevisisions() {
     module_enable(array('entity_feature'));
 
     // Add text field to entity.
@@ -206,7 +206,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Tests CRUD API functions: entity_(create|delete|save)
    */
-  function testCRUDAPIfunctions() {
+  public function testCRUDAPIfunctions() {
     module_enable(array('entity_feature'));
 
     $user1 = $this->drupalCreateUser();
@@ -247,7 +247,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Test loading entities defined in code.
    */
-  function testExportables() {
+  public function testExportables() {
     module_enable(array('entity_feature'));
 
     $types = entity_load_multiple_by_name('entity_test_type', array('test2', 'test'));
@@ -326,7 +326,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Make sure insert() and update() hooks for exportables are invoked.
    */
-  function testExportableHooks() {
+  public function testExportableHooks() {
     $_SESSION['entity_hook_test'] = array();
     // Enabling the module should invoke the enabled hook for the other
     // entities provided in code.
@@ -383,7 +383,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Tests determining changes.
    */
-  function testChanges() {
+  public function testChanges() {
     module_enable(array('entity_feature'));
     $types = entity_load_multiple_by_name('entity_test_type');
 
@@ -412,7 +412,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Tests viewing entities.
    */
-  function testRendering() {
+  public function testRendering() {
     module_enable(array('entity_feature'));
 
     $user1 = $this->drupalCreateUser();
@@ -428,7 +428,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   /**
    * Test uninstall of the entity_test module.
    */
-  function testUninstall() {
+  public function testUninstall() {
     // Add a test type and add a field instance, uninstall, then re-install and
     // make sure the field instance can be re-created.
     $test_type = entity_create('entity_test_type', array(
@@ -499,7 +499,7 @@ class EntityAPIRulesIntegrationTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'entity_test', 'rules');
     // Make sure the logger is enabled so the debug log is saved.
     variable_set('rules_debug_log', 1);
@@ -508,7 +508,7 @@ class EntityAPIRulesIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test the events.
    */
-  function testEvents() {
+  public function testEvents() {
     $rule = rules_reaction_rule();
     $rule->event('entity_test_presave');
     $rule->event('entity_test_insert');
@@ -550,7 +550,7 @@ class EntityAPICommentNodeAccessTestCase extends CommentHelperCase {
     );
   }
 
-  function setUp() {
+  public function setUp() {
     DrupalWebTestCase::setUp('comment', 'entity', 'node_access_test');
     node_access_rebuild();
 
@@ -565,7 +565,7 @@ class EntityAPICommentNodeAccessTestCase extends CommentHelperCase {
   /**
    * Tests comment access when node access is enabled.
    */
-  function testCommentNodeAccess() {
+  public function testCommentNodeAccess() {
     // Post comment.
     $this->drupalLogin($this->accessUser);
     $comment_text = $this->randomName();
@@ -603,7 +603,7 @@ class EntityAPIi18nItegrationTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity_test_i18n');
     $this->admin_user = $this->drupalCreateUser(array('bypass node access', 'administer nodes', 'administer languages', 'administer content types', 'administer blocks', 'access administration pages'));
     $this->drupalLogin($this->admin_user);
@@ -649,7 +649,7 @@ class EntityAPIi18nItegrationTestCase extends EntityWebTestCase {
   /**
    * Tests the provided default controller.
    */
-  function testDefaultController() {
+  public function testDefaultController() {
     // Create test entities for the user1 and unrelated to a user.
     $entity = entity_create('entity_test_type', array(
       'name' => 'test',
@@ -705,7 +705,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'entity_test', 'locale');
     // Create a field having 4 values for testing multiple value support.
     $this->field_name = drupal_strtolower($this->randomName() . '_field_name');
@@ -742,7 +742,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Creates a user and a node, then tests getting the properties.
    */
-  function testEntityMetadataWrapper() {
+  public function testEntityMetadataWrapper() {
     $account = $this->drupalCreateUser();
     // For testing sanitizing give the user a malicious user name.
     $account = user_save($account, array('name' => '<b>BadName</b>'));
@@ -891,7 +891,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Test supporting multi-valued fields.
    */
-  function testListMetadataWrappers() {
+  public function testListMetadataWrappers() {
     $property = $this->field_name;
     $values = array();
     $values[LANGUAGE_NONE][0] = array('value' => '<b>2009-09-05</b>');
@@ -965,7 +965,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Tests using the wrapper without any data.
    */
-  function testWithoutData() {
+  public function testWithoutData() {
     $wrapper = entity_metadata_wrapper('node', NULL, array('bundle' => 'page'));
     $this->assertTrue(isset($wrapper->title), 'Bundle properties have been added.');
     $info = $wrapper->author->mail->info();
@@ -975,7 +975,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Test using access() method.
    */
-  function testAccess() {
+  public function testAccess() {
     // Test without data.
     $account = $this->drupalCreateUser(array('bypass node access'));
     $this->assertTrue(entity_access('view', 'node', NULL, $account), 'Access without data checked.');
@@ -1035,7 +1035,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Tests using a data structure with passed in metadata.
    */
-  function testDataStructureWrapper() {
+  public function testDataStructureWrapper() {
     $log_entry = array(
       'type'        => 'entity',
       'message'     => $this->randomName(8),
@@ -1056,7 +1056,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Tests using entity_property_query().
    */
-  function testEntityQuery() {
+  public function testEntityQuery() {
     // Create a test node.
     $title = '<b>Is it bold?<b>';
     $values[LANGUAGE_NONE][0] = array('value' => 'foo');
@@ -1097,7 +1097,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
   /**
    * Tests serializing data wrappers, in particular for EntityDrupalWrapper.
    */
-  function testWrapperSerialization() {
+  public function testWrapperSerialization() {
     $node = $this->drupalCreateNode();
     $wrapper = entity_metadata_wrapper('node', $node);
     $this->assertTrue($wrapper->value() == $node, 'Data correctly wrapped.');
@@ -1141,7 +1141,7 @@ class EntityMetadataNodeAccessTestCase extends EntityWebTestCase {
   /**
    * Asserts node_access() correctly grants or denies access.
    */
-  function assertNodeMetadataAccess($ops, $node, $account) {
+  protected function assertNodeMetadataAccess($ops, $node, $account) {
     foreach ($ops as $op => $result) {
       $msg = t("entity_access() returns @result with operation '@op'.", array('@result' => $result ? 'TRUE' : 'FALSE', '@op' => $op));
       $access = entity_access($op, 'node', $node, $account);
@@ -1149,7 +1149,7 @@ class EntityMetadataNodeAccessTestCase extends EntityWebTestCase {
     }
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'node');
     // Clear permissions for authenticated users.
     db_delete('role_permission')
@@ -1160,7 +1160,7 @@ class EntityMetadataNodeAccessTestCase extends EntityWebTestCase {
   /**
    * Runs basic tests for entity_access() function.
    */
-  function testNodeMetadataAccess() {
+  public function testNodeMetadataAccess() {
     // Author user.
     $node_author_account = $this->drupalCreateUser(array());
     // Make a node object.
@@ -1215,7 +1215,7 @@ class EntityMetadataNodeCreateAccessTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'node');
   }
 
@@ -1281,7 +1281,7 @@ class EntityMetadataNodeRevisionAccessTestCase extends DrupalWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'node');
 
     // Create a node with several revisions.
@@ -1326,7 +1326,7 @@ class EntityMetadataNodeRevisionAccessTestCase extends DrupalWebTestCase {
   /**
    * Tests the entity_access() function for revisions.
    */
-  function testNodeRevisionAccess() {
+  public function testNodeRevisionAccess() {
     // $node_revisions[1] won't be the latest revision.
     $revision = $this->node_revisions[1];
 
@@ -1367,7 +1367,7 @@ class EntityMetadataTaxonomyAccessTestCase extends EntityWebTestCase {
   /**
    * Asserts entity_access() correctly grants or denies access.
    */
-  function assertTaxonomyMetadataAccess($ops, $term, $account) {
+  public function assertTaxonomyMetadataAccess($ops, $term, $account) {
     foreach ($ops as $op => $result) {
       $msg = t("entity_access() returns @result with operation '@op'.", array('@result' => $result ? 'TRUE' : 'FALSE', '@op' => $op));
       $access = entity_access($op, 'taxonomy_term', $term, $account);
@@ -1378,7 +1378,7 @@ class EntityMetadataTaxonomyAccessTestCase extends EntityWebTestCase {
   /**
    * @inheritdoc
    */
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'taxonomy');
     // Clear permissions for authenticated users.
     db_delete('role_permission')
@@ -1389,7 +1389,7 @@ class EntityMetadataTaxonomyAccessTestCase extends EntityWebTestCase {
   /**
    * Runs basic tests for entity_access() function.
    */
-  function testTaxonomyMetadataAccess() {
+  public function testTaxonomyMetadataAccess() {
     $vocab = $this->createVocabulary();
     $term = entity_property_values_create_entity('taxonomy_term', array(
       'name' => $this->randomName(),
@@ -1434,14 +1434,14 @@ class EntityTokenTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity_token');
   }
 
   /**
    * Tests whether token support is basically working.
    */
-  function testTokenSupport() {
+  public function testTokenSupport() {
     // Test basic tokens.
     $node = $this->drupalCreateNode(array('sticky' => TRUE, 'promote' => FALSE));
     $text = "Sticky: [node:sticky] Promote: [node:promote] User: [site:current-user:name]";
@@ -1502,7 +1502,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
     );
   }
 
-  function setUp() {
+  protected function setUp() {
     parent::setUp('entity', 'book', 'statistics', 'locale');
   }
 
@@ -1540,7 +1540,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test book module integration.
    */
-  function testBookModule() {
+  public function testBookModule() {
     $title = 'Book 1';
     $node = $this->drupalCreateNode(array('title' => $title, 'type' => 'book', 'book' => array('bid' => 'new')));
     $book = array('bid' => $node->nid, 'plid' => $node->book['mlid']);
@@ -1567,7 +1567,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test properties of a comment.
    */
-  function testComments() {
+  public function testComments() {
     $title = 'Node 1';
     $node = $this->drupalCreateNode(array('title' => $title, 'type' => 'page'));
     $author = $this->drupalCreateUser(array('access comments', 'post comments', 'edit own comments'));
@@ -1660,7 +1660,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test all properties of a node.
    */
-  function testNodeProperties() {
+  public function testNodeProperties() {
     $title = 'Book 1';
     $node = $this->drupalCreateNode(array('title' => $title, 'type' => 'page'));
     $wrapper = entity_metadata_wrapper('node', $node);
@@ -1697,7 +1697,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Tests properties provided by the taxonomy module.
    */
-  function testTaxonomyProperties() {
+  public function testTaxonomyProperties() {
     $vocab = $this->createVocabulary();
     $term_parent = entity_property_values_create_entity('taxonomy_term', array(
       'name' => $this->randomName(),
@@ -1785,7 +1785,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test all properties of a user.
    */
-  function testUserProperties() {
+  public function testUserProperties() {
     $account = $this->drupalCreateUser(array('access user profiles', 'change own username'));
     $account->login = REQUEST_TIME;
     $account->access = REQUEST_TIME;
@@ -1829,7 +1829,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test properties provided by system module.
    */
-  function testSystemProperties() {
+  public function testSystemProperties() {
     $wrapper = entity_metadata_site_wrapper();
     foreach ($wrapper as $key => $value) {
       $this->assertValue($wrapper, $key);
@@ -1851,7 +1851,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Runs some generic tests on each entity.
    */
-  function testCRUDfunctions() {
+  public function testCRUDfunctions() {
     $info = entity_get_info();
     foreach ($info as $entity_type => $entity_info) {
       // Test using access callback.
@@ -1898,7 +1898,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test making use of a text fields.
    */
-  function testTextFields() {
+  public function testTextFields() {
     // Create a simple text field without text processing.
     $field = array(
       'field_name' => 'field_text',
@@ -1983,7 +1983,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test making use of a file field.
    */
-  function testFileFields() {
+  public function testFileFields() {
     $file = $this->createFile();
 
     // Create a file field.
@@ -2052,7 +2052,7 @@ class EntityMetadataIntegrationTestCase extends EntityWebTestCase {
   /**
    * Test making use of an image field.
    */
-  function testImageFields() {
+  public function testImageFields() {
     $file = $this->createFile('image');
 
     // Just use the image field on the article node.

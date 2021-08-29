@@ -1206,23 +1206,23 @@ class EntityMetadataWrapperIterator implements RecursiveIterator {
     $this->keys = $keys;
   }
 
-  function rewind() {
+  public function rewind() {
     $this->position = 0;
   }
 
-  function current() {
+  public function current() {
     return $this->wrapper->get($this->keys[$this->position]);
   }
 
-  function key() {
+  public function key() {
     return $this->keys[$this->position];
   }
 
-  function next() {
+  public function next() {
     $this->position++;
   }
 
-  function valid() {
+  public function valid() {
     return isset($this->keys[$this->position]);
   }
 

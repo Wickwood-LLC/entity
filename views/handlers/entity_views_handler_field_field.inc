@@ -99,7 +99,7 @@ class entity_views_handler_field_field extends views_handler_field_field {
   /**
    * Overridden to force displaying multiple values in a single row.
    */
-  function multiple_options_form(&$form, &$form_state) {
+  public function multiple_options_form(&$form, &$form_state) {
     parent::multiple_options_form($form, $form_state);
     $form['group_rows']['#default_value'] = TRUE;
     $form['group_rows']['#disabled'] = TRUE;
