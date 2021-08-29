@@ -481,5 +481,77 @@ function hook_ENTITY_TYPE_defaults_rebuild($entities, $originals) {
 }
 
 /**
+ * Act on an entity before it is about to be created or updated.
+ *
+ * @param $entity
+ *   The entity object.
+ *
+ * @see hook_entity_presave()
+ */
+function hook_ENTITY_TYPE_presave($entity) {
+  $entity->changed = REQUEST_TIME;
+}
+
+/**
+ * Act on entities when inserted.
+ *
+ * @param $entity
+ *   The entity object.
+ *
+ * @see hook_entity_insert()
+ */
+function hook_ENTITY_TYPE_insert($entity) {
+  // Insert the new entity into a fictional table of all entities.
+  list($id) = entity_extract_ids($type, $entity);
+  db_insert('example_entity')
+    ->fields(array(
+      'type' => $type,
+      'id' => $id,
+      'created' => REQUEST_TIME,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
+}
+
+/**
+ * Act on entities when updated.
+ *
+ * @param $entity
+ *   The entity object.
+ *
+ * @see hook_entity_update()
+ */
+function hook_ENTITY_TYPE_update($entity) {
+  // Update the entity's entry in a fictional table of all entities.
+  $info = entity_get_info($type);
+  list($id) = entity_extract_ids($type, $entity);
+  db_update('example_entity')
+    ->fields(array(
+      'updated' => REQUEST_TIME,
+    ))
+    ->condition('type', $type)
+    ->condition('id', $id)
+    ->execute();
+}
+
+/**
+ * Act on entities when deleted.
+ *
+ * @param $entity
+ *   The entity object.
+ *
+ * @see hook_entity_delete()
+ */
+function hook_ENTITY_TYPE_delete($entity) {
+  // Delete the entity's entry from a fictional table of all entities.
+  $info = entity_get_info($type);
+  list($id) = entity_extract_ids($type, $entity);
+  db_delete('example_entity')
+    ->condition('type', $type)
+    ->condition('id', $id)
+    ->execute();
+}
+
+/**
  * @} End of "addtogroup hooks".
  */
