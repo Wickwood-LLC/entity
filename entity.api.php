@@ -256,7 +256,7 @@ function entity_metadata_hook_entity_info() {
  * by entity_metadata_wrapper().
  * For providing property information for fields see entity_hook_field_info().
  *
- * @return
+ * @return array
  *   An array whose keys are entity type names and whose values are arrays
  *   containing the keys:
  *   - properties: The array describing all properties for this entity. Entries

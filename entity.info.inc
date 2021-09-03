@@ -144,7 +144,7 @@ class EntityDefaultMetadataController {
  * @param $table
  *   The name of the table as used in hook_schema().
  *
- * @return
+ * @return array
  *   An array of property info as suiting for hook_entity_property_info().
  */
 function entity_metadata_convert_schema($table) {

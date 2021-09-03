@@ -35,7 +35,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    * @param $entity
    *   The entity to save.
    *
-   * @return
+   * @return int
    *   SAVED_NEW or SAVED_UPDATED is returned depending on the operation
    *   performed.
    */
@@ -47,7 +47,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    * @param array $values
    *   An array of values to set, keyed by property name.
    *
-   * @return
+   * @return object
    *   A new instance of the entity type.
    */
   public function create(array $values = array());
@@ -60,7 +60,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    * @param $prefix
    *   An optional prefix for each line.
    *
-   * @return
+   * @return string
    *   The exported entity as serialized string. The format is determined by
    *   the controller and has to be compatible with the format that is accepted
    *   by the import() method.
@@ -73,7 +73,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    * @param string $export
    *   An exported entity as serialized string.
    *
-   * @return
+   * @return object
    *   An entity object not yet saved.
    */
   public function import($export);
@@ -92,7 +92,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    *   (optional) A language code to use for rendering. Defaults to the global
    *   content language of the current request.
    *
-   * @return
+   * @return array
    *   The renderable array.
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL);
@@ -117,7 +117,7 @@ interface EntityAPIControllerInterface extends DrupalEntityControllerInterface {
    *   This parameter is only supported for entities which controller is a
    *   EntityAPIControllerInterface.
    *
-   * @return
+   * @return array
    *   The renderable array, keyed by entity name or numeric id.
    */
   public function view($entities, $view_mode = 'full', $langcode = NULL, $page = NULL);
@@ -137,7 +137,7 @@ interface EntityAPIControllerRevisionableInterface extends EntityAPIControllerIn
    * @param $revision_id
    *   The ID of the revision to delete.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the entity revision could be deleted, FALSE otherwise.
    */
   public function deleteRevision($revision_id);
@@ -184,7 +184,7 @@ class EntityAPIController extends DrupalDefaultEntityController implements Entit
   /**
    * Builds and executes the query for loading.
    *
-   * @return
+   * @return Traversable
    *   The results in a Traversable object.
    */
   public function query($ids, $conditions, $revision_id = FALSE) {
@@ -552,7 +552,7 @@ class EntityAPIController extends DrupalDefaultEntityController implements Entit
   /**
    * Implements EntityAPIControllerInterface.
    *
-   * @return
+   * @return string
    *   A serialized string in JSON format suitable for the import() method.
    */
   public function export($entity, $prefix = '') {

@@ -123,7 +123,7 @@ function entity_views_data() {
  *   excluded. Defaults to TRUE, as they are available for all views tables for
  *   the entity type anyways.
  *
- * @return
+ * @return array
  *   An array containing the data selection Views table definition for the
  *   entity type.
  *

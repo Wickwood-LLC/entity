@@ -198,8 +198,8 @@ class EntityDefaultUIController {
    *
    * @param $conditions
    *   An array of conditions as needed by entity_load().
-
-   * @return Array
+   *
+   * @return array
    *   A renderable array.
    */
   public function overviewTable($conditions = array()) {
@@ -431,7 +431,7 @@ class EntityDefaultUIController {
    * @param $entity
    *   The entity to manipulate.
    *
-   * @return
+   * @return string
    *   The status message of what has been applied.
    */
   public function applyOperation($op, $entity) {
@@ -479,7 +479,7 @@ class EntityDefaultUIController {
    * entity_form_submit_build_entity() provided by core, which already invokes
    * the field API attacher for fieldable entities.
    *
-   * @return
+   * @return object
    *   The updated entity.
    *
    * @see entity_ui_form_submit_build_entity()
@@ -655,7 +655,7 @@ function entity_ui_main_form_defaults($form, &$form_state, $entity = NULL, $op =
 /**
  * Clones the entity object and makes sure it will get saved as new entity.
  *
- * @return
+ * @return object
  *   The cloned entity object.
  */
 function entity_ui_clone_entity($entity_type, $entity) {
@@ -733,7 +733,7 @@ function entity_ui_controller_form_submit($form, &$form_state) {
  * This is a helper function for entities making use of the entity UI
  * controller.
  *
- * @return
+ * @return object
  *   The updated entity.
  *
  * @see EntityDefaultUIController::hook_forms()

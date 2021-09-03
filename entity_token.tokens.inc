@@ -8,7 +8,7 @@
 /**
  * Defines the types of properties to be added as token.
  *
- * @return
+ * @return array
  *   An array mapping token types to the usual (entity) type names.
  */
 function entity_token_types() {
@@ -19,7 +19,7 @@ function entity_token_types() {
 /**
  * Defines a list of token types that need to be chained.
  *
- * @return
+ * @return bool|array
  *   If a (token) type is given, whether the given type needs to be chained.
  *   Else a full list of token types to be chained as returned by
  *   entity_token_token_types().

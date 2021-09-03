@@ -559,7 +559,7 @@ function entity_metadata_field_verbatim_set($entity, $name, $items, $langcode, $
  *   (optional) Whether to fall back to the entity default language, if no
  *   value is available for the given language code yet.
  *
- * @return
+ * @return string
  *   The language code to use.
  */
 function entity_metadata_field_get_language($entity_type, $entity, $field, $langcode = LANGUAGE_NONE, $fallback = FALSE) {
@@ -677,7 +677,7 @@ function entity_metadata_field_file_validate_item($items, $context) {
  *
  * @throws EntityMalformedException
  *
- * @return boolean
+ * @return bool
  *   TRUE if access is allowed, FALSE otherwise.
  */
 function entity_metadata_no_hook_node_access($op, $node = NULL, $account = NULL) {

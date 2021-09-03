@@ -56,7 +56,7 @@ abstract class entity_views_example_query extends views_plugin_query {
    *   using a relationship. For example, if the node's field "author:name" is
    *   used, the user entity would be returned instead of the node entity.
    *
-   * @return
+   * @return array
    *   A numerically indexed array containing two items: the entity type of
    *   entities returned by this method; and the array of entities, keyed by the
    *   same indexes as the results.
@@ -78,7 +78,7 @@ abstract class entity_views_example_query extends views_plugin_query {
    * @param $field
    *   (optional) The field of which a wrapper should be returned.
    *
-   * @return
+   * @return array
    *   A numerically indexed array containing two items: the data type of
    *   the wrappers returned by this method; and the array of retrieved
    *   EntityMetadataWrapper objects, keyed by the same indexes as the results.

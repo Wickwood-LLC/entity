@@ -109,7 +109,7 @@ function entity_test_get_types($name = NULL) {
  * @param $reset
  *   A boolean indicating that the internal cache should be reset.
  *
- * @return
+ * @return array
  *   An array of test entity objects, indexed by pid.
  */
 function entity_test_load_multiple($pids = array(), $conditions = array(), $reset = FALSE) {

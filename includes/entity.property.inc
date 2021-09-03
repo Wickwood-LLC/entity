@@ -46,7 +46,7 @@ function entity_get_property_info($entity_type = NULL) {
 /**
  * Returns the default information for an entity property.
  *
- * @return
+ * @return array
  *   An array of optional property information keys mapped to their defaults.
  *
  * @see hook_entity_property_info()
@@ -68,7 +68,7 @@ function entity_property_info_defaults() {
  * @param $entity_type
  *   (optiona) The entity type to return properties for.
  *
- * @return
+ * @return array
  *   An array of info about properties. If the type is omitted, all known
  *   properties are returned.
  */
@@ -104,7 +104,7 @@ function entity_get_all_property_info($entity_type = NULL) {
  * @param $limit
  *   Limit the number of results. Defaults to 30.
  *
- * @return
+ * @return array
  *   An array of entity ids or NULL if there is no information how to query for
  *   the given property.
  */
@@ -231,7 +231,7 @@ function entity_field_update_instance() {
  * of the PHP variable type of $data. Example: the string "15" is a valid
  * integer, but "15nodes" is not.
  *
- * @return
+ * @return bool
  *   Whether the data is valid for the given type.
  */
 function entity_property_verify_data_type($data, $type) {
@@ -310,7 +310,7 @@ function entity_property_verify_data_type($data, $type) {
  *   assigned to the entity directly, without the use of the metadata-wrapper
  *   property.
  *
- * @return EntityDrupalWrapper
+ * @return EntityDrupalWrapper|false
  *   An EntityDrupalWrapper wrapping the newly created entity or FALSE, if
  *   there were no information how to create the entity.
  */
@@ -352,7 +352,7 @@ function entity_property_values_create_entity($entity_type, $values = array()) {
 /**
  * Extracts the contained type for a list type string like list<date>.
  *
- * @return
+ * @return string|false
  *   The contained type or FALSE, if the given type string is no list.
  */
 function entity_property_list_extract_type($type) {
@@ -368,7 +368,7 @@ function entity_property_list_extract_type($type) {
  * @param $type
  *   The type to examine.
  *
- * @return
+ * @return string
  *   For list types, the innermost type. The type itself otherwise.
  */
 function entity_property_extract_innermost_type($type) {

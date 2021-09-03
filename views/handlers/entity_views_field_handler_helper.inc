@@ -108,7 +108,7 @@ class EntityFieldHandlerHelper {
    * @param $selector
    *   The data selector.
    *
-   * @return
+   * @return string
    *   The last component of the data selector.
    */
   public static function get_selector_field_name($selector) {
@@ -188,7 +188,7 @@ class EntityFieldHandlerHelper {
    *   If TRUE, the complete selector for the field is returned, not just the
    *   one for its parent. Defaults to FALSE.
    *
-   * @return
+   * @return string
    *   An Entity API data selector for the given handler's relationship.
    */
   public static function construct_property_selector($handler, $complete = FALSE) {
@@ -399,7 +399,7 @@ class EntityFieldHandlerHelper {
    *   The values for the current row retrieved from the Views query, as an
    *   object.
    *
-   * @return
+   * @return string
    *   The rendered value for the field.
    */
   public static function render($handler, $values) {
@@ -421,7 +421,7 @@ class EntityFieldHandlerHelper {
    *   The values for the current row retrieved from the Views query, as an
    *   object.
    *
-   * @return
+   * @return string
    *   The rendered value for the given list.
    */
   public static function render_list($handler, $list, $values) {
@@ -479,7 +479,7 @@ class EntityFieldHandlerHelper {
    *   The values for the current row retrieved from the Views query, as an
    *   object.
    *
-   * @return
+   * @return string
    *   The rendered value.
    */
   public static function render_entity_link($handler, $value, $values) {
@@ -509,7 +509,7 @@ class EntityFieldHandlerHelper {
    *   The values for the current row retrieved from the Views query, as an
    *   object.
    *
-   * @return
+   * @return string
    *   The rendered value.
    */
   public static function render_single_value($handler, $value, $values) {

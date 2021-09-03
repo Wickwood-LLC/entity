@@ -55,7 +55,7 @@ define('ENTITY_FIXED', 0x04 | 0x02);
  *   One of 'create', 'view', 'save', 'delete', 'revision delete', 'access' or
  *   'form'.
  *
- * @return boolean
+ * @return bool
  *   Whether the entity type supports the given operation.
  */
 function entity_type_supports($entity_type, $op) {
@@ -104,7 +104,7 @@ function entity_type_supports($entity_type, $op) {
  * @param $entity_type
  *   The type of the entity to load.
  *
- * @return
+ * @return object|false
  *   A fully loaded entity object, or FALSE in case of error.
  */
 function entity_object_load($entity_id, $entity_type) {
@@ -230,7 +230,7 @@ function entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
  *   type has specified a name key, both the numeric id and the name may be
  *   passed.
  *
- * @return
+ * @return object|false
  *   The entity object, or FALSE.
  *
  * @see entity_load()
@@ -253,7 +253,7 @@ function entity_load_single($entity_type, $id) {
  *   fields must have. Instead, it is preferable to use EntityFieldQuery to
  *   retrieve a list of entity IDs loadable by this function.
  *
- * @return
+ * @return array
  *   An array of entity objects indexed by their names (or ids if the entity
  *   type has no name key).
  *
@@ -278,7 +278,7 @@ function entity_load_multiple_by_name($entity_type, $names = FALSE, $conditions 
  * @param $entity
  *   The entity to save.
  *
- * @return
+ * @return int|false
  *   For entity types provided by the CRUD API, SAVED_NEW or SAVED_UPDATED is
  *   returned depending on the operation performed. If there is no information
  *   how to save the entity, FALSE is returned.
@@ -355,7 +355,7 @@ function entity_delete_multiple($entity_type, $ids) {
  * @param $revision_id
  *   The id of the revision to load.
  *
- * @return
+ * @return object|false
  *   The entity object, or FALSE if there is no entity with the given revision
  *   id.
  */
@@ -376,7 +376,7 @@ function entity_revision_load($entity_type, $revision_id) {
  * @param $revision_id
  *   The revision ID to delete.
  *
- * @return
+ * @return bool
  *   TRUE if the entity revision could be deleted, FALSE otherwise.
  */
 function entity_revision_delete($entity_type, $revision_id) {
@@ -401,7 +401,7 @@ function entity_revision_delete($entity_type, $revision_id) {
  * @param $entity
  *   The entity object to check.
  *
- * @return boolean
+ * @return bool
  *   A boolean indicating whether the entity is in default revision is returned.
  *   If the entity is not revisionable or is new, TRUE is returned.
  *
@@ -459,7 +459,7 @@ function entity_revision_set_default($entity_type, $entity) {
  *   An array of values to set, keyed by property name. If the entity type has
  *   bundles the bundle key has to be specified.
  *
- * @return
+ * @return object|false
  *   A new instance of the entity type or FALSE if there is no information for
  *   the given entity type.
  *
@@ -489,7 +489,7 @@ function entity_create($entity_type, array $values) {
  * @param $prefix
  *   An optional prefix for each line.
  *
- * @return
+ * @return string
  *   The exported entity as serialized string. The format is determined by the
  *   respective entity controller, e.g. it is JSON for the EntityAPIController.
  *   The output is suitable for entity_import().
@@ -516,7 +516,7 @@ function entity_export($entity_type, $entity, $prefix = '') {
  *   The string containing the serialized entity as produced by
  *   entity_export().
  *
- * @return
+ * @return object
  *   The imported entity object not yet saved.
  */
 function entity_import($entity_type, $export) {
@@ -532,7 +532,7 @@ function entity_import($entity_type, $export) {
  * @param $entity_type
  *   The type of the entity.
  *
- * @return
+ * @return bool
  *   TRUE if the entity type is fieldable, FALSE otherwise.
  */
 function entity_type_is_fieldable($entity_type) {
@@ -559,7 +559,7 @@ function entity_type_is_fieldable($entity_type) {
  *   (optional) A language code to use for rendering. Defaults to the global
  *   content language of the current request.
  *
- * @return
+ * @return array
  *   The renderable array.
  */
 function entity_build_content($entity_type, $entity, $view_mode = 'full', $langcode = NULL) {
@@ -621,7 +621,7 @@ function entity_id($entity_type, $entity) {
  *   This parameter is only supported for entities which controller is a
  *   EntityAPIControllerInterface.
  *
- * @return
+ * @return array
  *   The renderable array, keyed by the entity type and by entity identifiers,
  *   for which the entity name is used if existing - see entity_id(). If there
  *   is no information on how to view an entity, FALSE is returned.
@@ -660,7 +660,7 @@ function entity_view($entity_type, $entities, $view_mode = 'full', $langcode = N
  * @param $account
  *   The user to check for. Leave it to NULL to check for the global user.
  *
- * @return boolean
+ * @return bool
  *   Whether access is allowed or not. If the entity type does not specify any
  *   access information, NULL is returned.
  *
@@ -685,7 +685,8 @@ function entity_access($op, $entity_type, $entity = NULL, $account = NULL) {
  *   The type of the entity.
  * @param $entity
  *   The entity to show the edit form for.
- * @return
+ *
+ * @return array|false
  *   The renderable array of the form. If there is no entity form or missing
  *   metadata, FALSE is returned.
  *
@@ -728,7 +729,7 @@ function entity_key_array_by_property(array $entities, $property) {
 /**
  * Get the entity info for the entity types provided via the entity CRUD API.
  *
- * @return
+ * @return array
  *   An array in the same format as entity_get_info(), containing the entities
  *   whose controller class implements the EntityAPIControllerInterface.
  */
@@ -753,7 +754,7 @@ function entity_crud_get_info() {
  *   The constant status like ENTITY_CUSTOM, ENTITY_IN_CODE, ENTITY_OVERRIDDEN
  *   or ENTITY_FIXED.
  *
- * @return
+ * @return bool
  *   TRUE if the entity has the status, FALSE otherwise.
  */
 function entity_has_status($entity_type, $entity, $status) {
@@ -1256,7 +1257,7 @@ function entity_forms($form_id, $args) {
  *   (optional) A pre-populated form state, e.g. to add in form include files.
  *   See entity_metadata_form_entity_ui().
  *
- * @return
+ * @return array
  *   The fully built and processed form, ready to be rendered.
  *
  * @see EntityDefaultUIController::hook_forms()

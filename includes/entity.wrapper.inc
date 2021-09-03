@@ -39,7 +39,7 @@ abstract class EntityMetadataWrapper {
   /**
    * Gets info about the wrapped data.
    *
-   * @return Array
+   * @return array
    *   Keys set are all keys as specified for a property in hook_entity_info()
    *   as well as possible the following keys:
    *    - name: If this wraps a property, the name of the property.
@@ -68,7 +68,7 @@ abstract class EntityMetadataWrapper {
    *   - decode: If set to TRUE and some textual data is already sanitized, it
    *     strips HTML tags and decodes HTML entities. Defaults to FALSE.
    *
-   * @return
+   * @return mixed|null
    *   The value of the wrapped data. If the data property is not set, NULL
    *   is returned.
    *
@@ -107,7 +107,7 @@ abstract class EntityMetadataWrapper {
   /**
    * Returns whether data is available to work with.
    *
-   * @return
+   * @return bool
    *   If we operate without any data FALSE, else TRUE.
    */
   protected function dataAvailable() {
@@ -187,7 +187,7 @@ abstract class EntityMetadataWrapper {
    *   account. So their options would be included for 'view', but for 'edit'
    *   not.
    *
-   * @return
+   * @return array|false
    *   An array as used by hook_options_list() or FALSE.
    */
   public function optionsList($op = 'edit') {
@@ -226,7 +226,7 @@ abstract class EntityMetadataWrapper {
    * @param $account
    *   The user to check for. Leave it to NULL to check for the global user.
    *
-   * @return boolean
+   * @return bool
    *   Whether access to entity property is allowed for the given operation.
    *   However if we wrap no data, it returns whether access is allowed to the
    *   property of all entities of this type.
@@ -239,7 +239,7 @@ abstract class EntityMetadataWrapper {
   /**
    * Returns a string to use to identify this wrapper in error messages.
    *
-   * @return
+   * @return string
    *   A string that identifies this wrapper and its chain of ancestors, of the
    *   form 'grandparentidentifier->parentidentifier->identifier'.
    */
@@ -344,7 +344,7 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
    *   The name of the property. If not given, info about all properties will
    *   be returned.
    *
-   * @return
+   * @return array
    *   An array of info about the property.
    *
    * @throws EntityMetadataWrapperException
@@ -377,6 +377,7 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
    *
    * @param $langcode
    *   The language code of the language to set.
+   *
    * @return EntityWrapper
    */
   public function language($langcode = LANGUAGE_NONE) {
@@ -390,7 +391,7 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
   /**
    * Gets the language used for retrieving properties.
    *
-   * @return String
+   * @return string|null
    *   The language object of the language or NULL for the default language.
    *
    * @see EntityStructureWrapper::language()
@@ -407,7 +408,7 @@ class EntityStructureWrapper extends EntityMetadataWrapper implements IteratorAg
   /**
    * Get the wrapper for a property.
    *
-   * @return
+   * @return EntityMetadataWrapper
    *   An instance of EntityMetadataWrapper.
    */
   public function get($name) {
@@ -925,7 +926,8 @@ class EntityDrupalWrapper extends EntityStructureWrapper {
    *
    * @param $name
    *   One of 'id', 'name', 'bundle' or 'revision'.
-   * @return
+   *
+   * @return string
    *   The name of the key used by the entity.
    */
   public function entityKey($name) {
@@ -1025,7 +1027,7 @@ class EntityListWrapper extends EntityMetadataWrapper implements IteratorAggrega
   /**
    * Get the wrapper for a single item.
    *
-   * @return
+   * @return EntityMetadataWrapper
    *   An instance of EntityMetadataWrapper.
    */
   public function get($delta) {
