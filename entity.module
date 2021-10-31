@@ -58,6 +58,30 @@ define('ENTITY_FIXED', 0x04 | 0x02);
  * @return bool
  *   Whether the entity type supports the given operation.
  */
+
+/**
+ * Implements hook_help().
+ */
+function entity_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#entity':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Entity API module extends the entity API included with Drupal core. It provides a unified way to deal with entities and their properties. It also provides a CRUD controller that helps to simplify creating new entity types. For more information, see the online handbook entry for <a href="@entity">Entity module</a>.', array('@entity' => 'https://www.drupal.org/docs/7/api/entity-api', '@blocks' => url('admin/structure/block'))) . '</p>';
+
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<p>' . t(' Entity API is used by site-builder and developers to create lightweight and flexible solutions. Analogous to LEGO bricks, Entity API can be used to build Entity types, which can make Bundles, to which we can add Fields and then create Entities. The new relationships between Entity types > Bundles > Fields > Entities was one of the most important changes of Drupal 7, and brought components from some well-loved contributed modules -- such as CCK -- into the core system.') . '</p>';
+
+      $output .= '<dl>';
+      $output .= '<dt>' . t('For site-builders') . '</dt>';
+      $output .= '<dd>' . t('This is an API module, so it does not provide any end-user features. However, it does provides some entity generic functionality to other modules that site-builders may leverage. The first is a Views display plugin and field to render or link to any entity (by view-mode).  It also includes a CTools content plugin to render an entity by view-mode, and it includes an Entity Tokens module which makes sure there are tokens for most entity properties and fields.') . '</dd>';
+      $output .= '<dt>' . t('For developers') . '</dt>';
+      $output .= '<dd>' . t('The module provides API functions allowing modules to create, save, delete, view or to determine access for any entity. It also introduces a unique place for metadata about entity relationships and entity properties. The information about entity properties contains the data type and callbacks for how to get and set the data of a property.') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
 function entity_type_supports($entity_type, $op) {
   $info = entity_get_info($entity_type);
   $keys = array(
