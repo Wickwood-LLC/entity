@@ -833,10 +833,11 @@ class EntityAPIControllerExportable extends EntityAPIController {
 
   /**
    * Overridden.
-   * @see DrupalDefaultEntityController::attachLoad()
    *
    * Changed to call type-specific hook with the entities keyed by name if they
    * have one.
+   *
+   * @see DrupalDefaultEntityController::attachLoad()
    */
   protected function attachLoad(&$queried_entities, $revision_id = FALSE) {
     // Attach fields.

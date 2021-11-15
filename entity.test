@@ -204,7 +204,7 @@ class EntityAPITestCase extends EntityWebTestCase {
   }
 
   /**
-   * Tests CRUD API functions: entity_(create|delete|save)
+   * Tests CRUD API functions: entity_(create|delete|save).
    */
   public function testCRUDAPIfunctions() {
     module_enable(array('entity_feature'));
@@ -636,11 +636,11 @@ class EntityAPIi18nItegrationTestCase extends EntityWebTestCase {
     }
     elseif ($this->xpath('//input[@type="checkbox" and @name=:name and @checked="checked"]', array(':name' => 'enabled[' . $language_code . ']'))) {
       // It's installed and enabled. No need to do anything.
-      $this->assertTrue(true, 'Language [' . $language_code . '] already installed and enabled.');
+      $this->assertTrue(TRUE, 'Language [' . $language_code . '] already installed and enabled.');
     }
     else {
       // It's installed but not enabled. Enable it.
-      $this->assertTrue(true, 'Language [' . $language_code . '] already installed.');
+      $this->assertTrue(TRUE, 'Language [' . $language_code . '] already installed.');
       $this->drupalPost(NULL, array('enabled[' . $language_code . ']' => TRUE), t('Save configuration'));
       $this->assertRaw(t('Configuration saved.'), t('Language successfully enabled.'));
     }
@@ -728,7 +728,7 @@ class EntityMetadataTestCase extends EntityWebTestCase {
         'settings' => array(
           'size' => 64,
         ),
-      )
+      ),
     );
     field_create_instance($this->instance);
 
@@ -1234,7 +1234,7 @@ class EntityMetadataNodeCreateAccessTestCase extends EntityWebTestCase {
     $auth_only_account = $this->drupalCreateUser(array());
     $node_author_account = $this->drupalCreateUser(array());
 
-    // Make a node object with Entity API (contrib)
+    // Make a node object with Entity API (contrib).
     $settings = array(
       'uid' => $node_author_account->uid,
       'type' => 'page',

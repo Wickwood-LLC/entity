@@ -156,10 +156,10 @@
  *   In case the 'admin ui' is used, no callback needs to be specified.
  * - entity cache: (optional) Whether entities should be cached using the cache
  *   system. Requires the entitycache module to be installed and enabled and the
- *   module key to be specified. As cached entities are only retrieved by id key,
- *   the cache would not apply to exportable entities retrieved by name key.
- *   If enabled and the entitycache module is active, 'field cache' is obsolete
- *   and is automatically disabled. Defaults to FALSE.
+ *   module key to be specified. As cached entities are only retrieved by id
+ *   key, the cache would not apply to exportable entities retrieved by name
+ *   key. If enabled and the entitycache module is active, 'field cache' is
+ *   obsolete and is automatically disabled. Defaults to FALSE.
  *
  * @see hook_entity_info()
  * @see entity_metadata_hook_entity_info()
@@ -380,9 +380,9 @@ function entity_metadata_hook_entity_info() {
  *     with an array of info about the bundle specific properties, structured in
  *     the same way as the entity properties array.
  *
- *  @see hook_entity_property_info_alter()
- *  @see entity_get_property_info()
- *  @see entity_metadata_wrapper()
+ * @see hook_entity_property_info_alter()
+ * @see entity_get_property_info()
+ * @see entity_metadata_wrapper()
  */
 function hook_entity_property_info() {
   $info = array();

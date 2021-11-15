@@ -664,8 +664,6 @@ function entity_metadata_field_file_validate_item($items, $context) {
  * This function does not implement hook_node_access(), thus it may not be
  * called entity_metadata_node_access().
  *
- * @see entity_access()
- *
  * @param $op
  *   The operation being performed. One of 'view', 'update', 'create' or
  *   'delete'.
@@ -679,6 +677,8 @@ function entity_metadata_field_file_validate_item($items, $context) {
  *
  * @return bool
  *   TRUE if access is allowed, FALSE otherwise.
+ *
+ * @see entity_access()
  */
 function entity_metadata_no_hook_node_access($op, $node = NULL, $account = NULL) {
   // First deal with the case where a $node is provided.
@@ -1082,8 +1082,8 @@ function entity_metadata_table_query($entity_type, $property, $value, $limit) {
 
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', $entity_type, '=')
-        ->propertyCondition($info['schema field'], $value, is_array($value) ? 'IN' : '=')
-        ->range(0, $limit);
+    ->propertyCondition($info['schema field'], $value, is_array($value) ? 'IN' : '=')
+    ->range(0, $limit);
 
   $result = $query->execute();
   return !empty($result[$entity_type]) ? array_keys($result[$entity_type]) : array();
@@ -1100,8 +1100,8 @@ function entity_metadata_field_query($entity_type, $property, $value, $limit) {
   $columns = array_keys($field['columns']);
 
   $query->entityCondition('entity_type', $entity_type, '=')
-        ->fieldCondition($field, $columns[0], $value, is_array($value) ? 'IN' : '=')
-        ->range(0, $limit);
+    ->fieldCondition($field, $columns[0], $value, is_array($value) ? 'IN' : '=')
+    ->range(0, $limit);
 
   $result = $query->execute();
   return !empty($result[$entity_type]) ? array_keys($result[$entity_type]) : array();

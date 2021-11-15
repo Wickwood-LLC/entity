@@ -139,7 +139,7 @@ class EntityDefaultFeaturesController {
 }
 
 /**
- * Implements of hook_features_api().
+ * Implements hook_features_api().
  */
 function entity_features_api() {
   $items = array();

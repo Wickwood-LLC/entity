@@ -58,8 +58,9 @@ abstract class EntityMetadataWrapper {
   }
 
   /**
-   * Returns the wrapped data. If no options are given the data is returned as
-   * described in the info.
+   * Returns the wrapped data.
+   *
+   * If no options are given the data is returned as described in the info.
    *
    * @param $options
    *   (optional) A keyed array of options:
