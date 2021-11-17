@@ -1,8 +1,8 @@
 name = Entity API
 description = Enables modules to work with any entity type and to provide entities.
+test_dependencies[] = rules:rules
+test_dependencies[] = i18n:i18n_string
 core = 7.x
-test_dependencies[] = rules
-test_dependencies[] = i18n_string
 
 files[] = entity.features.inc
 files[] = entity.i18n.inc

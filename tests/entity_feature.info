@@ -1,7 +1,7 @@
 name = Entity feature module
 description = Provides some entities in code.
-version = VERSION
+dependencies[] = entity:entity_test
 core = 7.x
-files[] = entity_feature.module
-dependencies[] = entity_test
 hidden = TRUE
+
+files[] = entity_feature.module
