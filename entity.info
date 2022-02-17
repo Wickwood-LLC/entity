@@ -1,5 +1,5 @@
 name = Entity API
-description = Enables modules to work with any entity type and to provide entities.
+description = Enables modules to work with any entity type and to provide entities. Applied patch from https://drupal.org/node/1621084#comment-6090246 to fix issue where Date fields that collect end dates do not produce tokens for the starting or ending date.
 test_dependencies[] = rules:rules
 test_dependencies[] = i18n:i18n_string
 core = 7.x
@@ -32,3 +32,6 @@ files[] = views/handlers/entity_views_handler_field_uri.inc
 files[] = views/handlers/entity_views_handler_relationship_by_bundle.inc
 files[] = views/handlers/entity_views_handler_relationship.inc
 files[] = views/plugins/entity_views_plugin_row_entity_view.inc
+
+version = "7.x-1.10"
+project = "entity"
